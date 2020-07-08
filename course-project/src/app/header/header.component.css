@@ -1,0 +1,14 @@
+nav {
+  background-color: #d7bdbd;
+}
+
+.dropdown-menu a{
+  color: black;
+}
+ a,button{
+    background:none;
+    border : none;
+    color : black;
+}
+
+

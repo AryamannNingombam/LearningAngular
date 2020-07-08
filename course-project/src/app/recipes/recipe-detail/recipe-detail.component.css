@@ -1,0 +1,10 @@
+p{
+    font-size : 20px;
+}
+
+.ingredientList, .dropdown-menu a{
+  cursor: pointer;
+}
+img {
+    align-content : center
+}

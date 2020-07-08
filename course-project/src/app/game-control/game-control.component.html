@@ -1,0 +1,34 @@
+<div class="container" style="text-align:center">
+  <div class="row">
+    <div class="col-md-12">
+      <h1 >Play With This</h1>
+    </div>
+  </div>
+</div>
+<div class="row" style="text-align: center">
+  <div class="col-md-12">
+    <button class="btn btn-success btn-lg my-5 mx-3" (click)="startGame()">Play</button>
+    <button [disabled]="!updatePauseButton" class="btn btn-danger btn-lg my-5 mx-3" (click)="pauseGame()">Pause</button>
+  </div>
+</div>
+<div class="row" style="text-align: center">
+  <div class="col-md-6">
+    <h1>ODD ({{oddNumbers.length}}) </h1>
+    <app-odd *ngFor="let oddNumber of oddNumbers" [oddNum]="oddNumber">
+
+
+    </app-odd>
+  </div>
+  <div class="col-md-6">
+    <h1> EVEN ({{evenNumbers.length}})</h1>
+    <app-even *ngFor="let evenNumber of evenNumbers" [evenNum]="evenNumber">
+
+    </app-even>
+  </div>
+</div>
+
+<div class="row">
+  <div class="col-md-12"><h1 appBasicHighlight class="myClass">NAMASTE JI!!</h1></div>
+  <div class="col-md-12"><h1 appBetterHighlight >NAMASTE JI!!</h1></div>
+</div>
+

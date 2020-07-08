@@ -1,0 +1,15 @@
+
+<app-header (myEvent)="checkEvent($event)"></app-header>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+
+      <app-recipes *ngIf="whatToShow === 'Recipes'"></app-recipes>
+      <app-shopping-list *ngIf="whatToShow ==='Shopping' "></app-shopping-list>
+
+    </div>
+  </div>
+</div>
+
+<!--<app-game-control (numberFired)="getFiredNumber($event)"></app-game-control>
+  -->
