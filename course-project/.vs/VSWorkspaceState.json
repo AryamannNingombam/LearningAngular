@@ -9,8 +9,10 @@
     "\\src\\app\\Services",
     "\\src\\app\\shared",
     "\\src\\app\\shopping-list",
-    "\\src\\app\\shopping-list\\shopping-edit"
+    "\\src\\app\\shopping-list\\shopping-edit",
+    "\\src\\app\\test-component",
+    "\\src\\app\\test-component\\home"
   ],
-  "SelectedNode": "\\src\\app\\app-routing.module.ts",
+  "SelectedNode": "\\src\\app\\Services\\shoppinglist.service.ts",
   "PreviewInSolutionExplorer": false
 }

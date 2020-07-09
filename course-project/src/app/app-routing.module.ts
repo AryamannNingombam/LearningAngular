@@ -14,7 +14,7 @@ import { UserComponent } from './test-component/user/user.component';
 import { TestComponent } from './test-component/test.component';
 
 
-/*const appRoutes: Routes = [
+const appRoutes: Routes = [
   
   {
     path: '', redirectTo: '/recipes', pathMatch : 'full'
@@ -47,12 +47,12 @@ import { TestComponent } from './test-component/test.component';
   }
 
 ]
-*/
+/*
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'user/:id', component: UserComponent }
 ];
-
+*/
 
 @NgModule(
   {
