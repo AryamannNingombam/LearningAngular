@@ -1,19 +1,27 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { ActivateService } from './test-component/user/user-activate.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit, OnDestroy {
   title = 'course-project';
-  whatToShow = 'Recipes';
-  getFiredNumber(num: number) {
-    console.log(num);
-  }
-  checkEvent(event) {
+  aOrNot = false;
+  mySubject: Subscription;
+  constructor(private activationService: ActivateService) { }
 
-    event === 'Recipe' ? this.whatToShow = 'Recipes' : this.whatToShow = 'Shopping';
+  ngOnInit() {
+    this.mySubject = this.activationService.activateEmmitter.subscribe((value: boolean) => {
+      this.aOrNot = value;
+
+    })
   }
+  ngOnDestroy() {
+    this.mySubject.unsubscribe()
+  }
+
 
 }
