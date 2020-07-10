@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router'
+import { RouterModule, Routes, } from '@angular/router'
 import { RecipesComponent } from './recipes/recipes.component';
 import { HeaderComponent } from './header/header.component';
 import { ShoppingListComponent } from './shopping-list/shopping-list.component';
@@ -13,7 +13,7 @@ import { HomeComponent } from './test-component/home/home.component';
 import { UserComponent } from './test-component/user/user.component';
 import { TestComponent } from './test-component/test.component';
 
-
+/*
 const appRoutes: Routes = [
   
   {
@@ -47,12 +47,15 @@ const appRoutes: Routes = [
   }
 
 ]
-/*
+
 const appRoutes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'user/:id', component: UserComponent }
 ];
 */
+
+const appRoutes: Routes = [
+  { path: '', component : AppComponent }]
 
 @NgModule(
   {

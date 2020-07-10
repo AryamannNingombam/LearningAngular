@@ -1,6 +1,8 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit, OnDestroy, ElementRef, ViewChild } from '@angular/core';
 import { ActivateService } from './test-component/user/user-activate.service';
 import { Subscription } from 'rxjs';
+import { NgForm } from '@angular/forms';
+
 
 @Component({
   selector: 'app-root',
@@ -8,19 +10,30 @@ import { Subscription } from 'rxjs';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit, OnDestroy {
-  title = 'course-project';
+  @ViewChild('f') formChild: NgForm;
   aOrNot = false;
   mySubject: Subscription;
   constructor(private activationService: ActivateService) { }
-
+ 
   ngOnInit() {
-    this.mySubject = this.activationService.activateEmmitter.subscribe((value: boolean) => {
-      this.aOrNot = value;
-
-    })
+    //this.mySubject = this.activationService.activateEmmitter.subscribe((value: boolean) => {
+     // this.aOrNot = value;
+    //
+   // })
   }
   ngOnDestroy() {
-    this.mySubject.unsubscribe()
+    //this.mySubject.unsubscribe()
+  }
+
+  suggestUserName() {
+    const suggestedName = 'Superuser';
+  }
+  onSubmit() {
+  
+    console.log(this.formChild);
+    if (!this.formChild.valid) {
+      alert('Not Valid!');
+    }
   }
 
 
