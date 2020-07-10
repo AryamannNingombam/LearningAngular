@@ -1,7 +1,7 @@
 import { Component, OnInit, OnDestroy, ElementRef, ViewChild } from '@angular/core';
 import { ActivateService } from './test-component/user/user-activate.service';
 import { Subscription } from 'rxjs';
-import { NgForm } from '@angular/forms';
+import { NgForm, NgModel } from '@angular/forms';
 
 
 @Component({
@@ -11,8 +11,12 @@ import { NgForm } from '@angular/forms';
 })
 export class AppComponent implements OnInit, OnDestroy {
   @ViewChild('f') formChild: NgForm;
-  aOrNot = false;
+  @ViewChild('email') formEmailChild: NgModel;
+  defaultQuestion = 'pet';
+  emailInput = '';
+  suggestUser = false;
   mySubject: Subscription;
+  value = 'Namaste';
   constructor(private activationService: ActivateService) { }
  
   ngOnInit() {
@@ -24,12 +28,14 @@ export class AppComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     //this.mySubject.unsubscribe()
   }
-
+  showSuggestion() {
+    this.suggestUser = true;
+  }
   suggestUserName() {
     const suggestedName = 'Superuser';
   }
   onSubmit() {
-  
+    console.log(this.formEmailChild);
     console.log(this.formChild);
     if (!this.formChild.valid) {
       alert('Not Valid!');
