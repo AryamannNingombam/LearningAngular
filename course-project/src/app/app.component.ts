@@ -1,8 +1,14 @@
 import { Component, OnInit, OnDestroy, ElementRef, ViewChild } from '@angular/core';
 import { ActivateService } from './test-component/user/user-activate.service';
 import { Subscription } from 'rxjs';
-import { NgForm, NgModel } from '@angular/forms';
-
+import { NgForm, NgModel, NgModelGroup, FormGroup } from '@angular/forms';
+interface userData {
+  username: string,
+  email: string,
+  secretQuestion: string,
+  answer: string,
+  gender  : string
+}
 
 @Component({
   selector: 'app-root',
@@ -10,13 +16,11 @@ import { NgForm, NgModel } from '@angular/forms';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit, OnDestroy {
-  @ViewChild('f') formChild: NgForm;
-  @ViewChild('email') formEmailChild: NgModel;
-  defaultQuestion = 'pet';
-  emailInput = '';
-  suggestUser = false;
-  mySubject: Subscription;
-  value = 'Namaste';
+  signUpForm: FormGroup;
+  genders = ['Male', 'Female', 'Other'];
+  reasons = ['Work','Personal','Counselling','Others']
+  showThanks = false;
+  @ViewChild('formData') formData: NgForm;
   constructor(private activationService: ActivateService) { }
  
   ngOnInit() {
@@ -28,19 +32,20 @@ export class AppComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     //this.mySubject.unsubscribe()
   }
-  showSuggestion() {
-    this.suggestUser = true;
-  }
-  suggestUserName() {
-    const suggestedName = 'Superuser';
-  }
   onSubmit() {
-    console.log(this.formEmailChild);
-    console.log(this.formChild);
-    if (!this.formChild.valid) {
-      alert('Not Valid!');
+   
+    if (this.formData.valid) {
+      this.showThanks = true;
     }
+    console.log(this.showThanks);
+    this.formData.reset();
+
+
   }
+
+
+
+   
 
 
 }

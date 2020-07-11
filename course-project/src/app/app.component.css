@@ -3,3 +3,11 @@ input.ng-invalid.ng-touched{
     border : 2px solid red;
 
 }
+
+div.container  {
+    text-align :center;
+    margin-top :50px;
+}
+.aligning {
+    text-align : center;
+}
