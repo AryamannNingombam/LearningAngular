@@ -1,0 +1,28 @@
+<!-- <app-header ></app-header>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div> -->
+
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <form (ngSubmit)="onSubmit()" #f= "ngForm">
+
+        <label for="username">Username : </label>
+          <input type="text" ngModel id="username" name="username" required>
+          <label for="email">Email : </label>
+          <input type="email" ngModel id="email" name="email" ngModel email required>
+        
+          <button class="btn btn-success" type="submit">Submit</button>       
+      </form>
+    </div>
+
+  </div>
+
+
+</div>
