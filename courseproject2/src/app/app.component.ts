@@ -1,14 +1,9 @@
 import { Component, OnInit, OnDestroy, ElementRef, ViewChild } from '@angular/core';
 import { ActivateService } from './test-component/user/user-activate.service';
 import { Subscription } from 'rxjs';
-import { NgForm, NgModel, NgModelGroup, FormGroup, FormControl } from '@angular/forms';
-interface userData {
-  username: string,
-  email: string,
-  secretQuestion: string,
-  answer: string,
-  gender  : string
-}
+import { NgForm, NgModel,
+   NgModelGroup, FormGroup, FormControl, Validators } from '@angular/forms';
+
 
 @Component({
   selector: 'app-root',
@@ -18,10 +13,11 @@ interface userData {
 export class AppComponent implements OnInit, OnDestroy {
   signUpForm: FormGroup;
   genders = ['Male', 'Female', 'Other'];
+   @ViewChild('f') formTDData : FormData;
   
-  @ViewChild('f') f: NgForm;
+ 
   constructor(private activationService: ActivateService) {
-    console.log('In');
+   
    }
  
   ngOnInit() {
@@ -31,8 +27,12 @@ export class AppComponent implements OnInit, OnDestroy {
    // })
     //Delete This
     this.signUpForm  = new FormGroup({
-         'username' : new FormControl(null),
-         'email' : new FormControl(null),
+      'userData' : new FormGroup({
+        'username' : new FormControl(null,[Validators.required]),
+        'email' : new FormControl(null,[Validators.required,Validators.email]),
+      })
+      ,   
+      
          'gender' : new FormControl('Male'),
 
 
@@ -44,11 +44,15 @@ export class AppComponent implements OnInit, OnDestroy {
     //this.mySubject.unsubscribe()
   }
   onSubmit() {
-    console.log(this.f);
+    console.log('Submitted Reactive.');
+    console.log(this.signUpForm);
 
 
 
-
+  }
+  onSubmitTD(){
+      console.log('Submitted TD.');
+      console.log(this.formTDData);
   }
 
 

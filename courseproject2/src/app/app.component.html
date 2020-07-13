@@ -6,23 +6,92 @@
     </div>
   </div>
 </div> -->
+<h1>REACTIVE METHOD!!</h1>
+<div class="container">
+  <div class="row">
+    <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+      <form [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
+        <div formGroupName="userData">
+          <div class="form-group">
+            <label for="username">Username</label>
+            <input
+              type="text"
+              id="username"
+              formControlName="username"
+              class="form-control">
+              <span class="help-block"
+              *ngIf="!signUpForm.get('userData.username').valid && signUpForm.get('userData.username').touched">Please Enter A Valid Username!</span>
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input
+              type="text"
+              id="email"
+              formControlName="email"
+              class="form-control">
+          </div>
+        </div>
+        <div class="radio" *ngFor="let gender of genders">
+          <label>
+            <input
+              type="radio"
+              formControlName="gender"
+              [value]="gender">{{ gender }}
+          </label>
+        </div>
+        <button class="btn btn-primary" type="submit">Submit</button>
+      </form>
+    </div>
+  </div>
+</div>
 
+
+<h1>TEMPLATE DRIVEN!!</h1>
 
 <div class="container">
   <div class="row">
-    <div class="col-md-12">
-      <form (ngSubmit)="onSubmit()" #f= "ngForm">
-
-        <label for="username">Username : </label>
-          <input type="text" ngModel id="username" name="username" required>
-          <label for="email">Email : </label>
-          <input type="email" ngModel id="email" name="email" ngModel email required>
-        
-          <button class="btn btn-success" type="submit">Submit</button>       
+    <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
+      <form #f="ngForm" (ngSubmit)="onSubmitTD()">
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input
+            type="text"
+            id="username1"
+            name = "username1"
+            ngModel
+            required
+            #username="ngModel"
+            class="form-control">
+            <span class="help-block"
+            *ngIf="!username.valid && username.touched">Please Enter A Valid Username!</span>
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input
+            type="text"
+            id="email1"
+           ngModel
+           name='email1'
+           #email = "ngModel"
+           email
+          required
+           class="form-control">
+        </div>
+        <span class="help-box" *ngIf="!email.valid && email.touched">Please Enter A Valid Email!</span>
+        <div class="radio" *ngFor="let gender of genders">
+          <label>
+            <input
+              type="radio"
+              
+              [value]="gender"
+              ngModel
+              name ="gender1"
+              >{{ gender }}
+          </label>
+        </div>
+        <button class="btn btn-primary" type="submit">Submit</button>
       </form>
     </div>
-
   </div>
-
-
 </div>
+
