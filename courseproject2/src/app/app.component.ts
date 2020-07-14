@@ -38,6 +38,8 @@ export class AppComponent implements OnInit, OnDestroy {
 
     });
 
+    
+
 
   }
   ngOnDestroy() {
@@ -46,7 +48,8 @@ export class AppComponent implements OnInit, OnDestroy {
   onSubmit() {
     console.log('Submitted Reactive.');
     console.log(this.signUpForm);
-
+    this.signUpForm.reset({
+      'gender' :'Other'    })
 
 
   }
@@ -81,6 +84,13 @@ forbiddenEmails(control :FormControl) :Observable<any> |Promise<any>{
   return promise
 
 }
+suggestUsername(){
+  this.signUpForm.patchValue({
+    'userData':{
+      'username' : "Aryamann" 
+    }  })
+console.log('Clicked')
+  }
 
    
 
