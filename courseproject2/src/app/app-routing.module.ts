@@ -53,8 +53,8 @@ import { TestComponent } from './test-component/test.component';
 
 
 const appRoutes: Routes = [
-  { path: '', component : AppComponent }]
-
+ {path :'',component :TestComponent} 
+]
 @NgModule(
   {
 

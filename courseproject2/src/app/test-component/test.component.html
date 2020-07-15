@@ -1,20 +1,64 @@
+<h1>REACTIVE METHOD</h1>
 <div class="container">
-  <div class="row">
-    <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
-      <a routerLink="/">Home</a> |
-      <a [routerLink]="['user', 1]">
-        User 1
-      </a>
-      |
-      <a [routerLink]="['user', 2]">
-        User 2
-      </a>
-    </div>
-  </div>
-  <hr />
-  <div class="row">
-    <div class="col-xs-12 col-sm-10 col-md-8 col-sm-offset-1 col-md-offset-2">
-      <router-outlet></router-outlet>
-    </div>
-  </div>
+<form [formGroup]="makingProjectForm" (ngSubmit)="onSubmit()">
+<div class="row form-group">
+  <label for="projectName">Project Name:</label>
+  <input class="form-control" formControlName="projectName"  id="projectName">
+  <span class="help-block" *ngIf="!makingProjectForm.get('projectName').valid && makingProjectForm.get('projectName').touched">You're Not Allowed To Do That Baby!</span>
 </div>
+<div class="row form-group">
+  <label for="email">Email:</label>
+  <input class="form-control" formControlName="email"  id="email">
+</div>
+<div class="row form-group">
+  <label for="status">Status:</label>
+  <select  class="form-control" formControlName="projectStatus"  id="status">
+
+    <option *ngFor="let status of statuses" [value]="status" class="form-control">{{status}}</option>
+ 
+
+  </select>
+</div>
+
+
+
+
+  <button class="btn btn-success" type="submit">Submit</button>
+</form>
+
+</div>
+
+
+
+
+<h1>TEMPLATE DRIVEN</h1>
+  
+  
+  <div class="container">
+  <form  (ngSubmit)="onSubmit()">
+  <div class="row form-group">
+    <label for="projectName">Project Name:</label>
+    <input class="form-control"   id="projectName">
+    <span class="help-block">You're Not Allowed To Do That Baby!</span>
+  </div>
+  <div class="row form-group">
+    <label for="email">Email:</label>
+    <input class="form-control"        id="email">
+  </div>
+  <div class="row form-group">
+    <label for="status">Status:</label>
+    <select  class="form-control"   id="status">
+  
+      <option *ngFor="let status of statuses" [value]="status" class="form-control">{{status}}</option>
+   
+  
+    </select>
+  </div>
+  
+  
+  
+  
+    <button class="btn btn-success" type="submit">Submit</button>
+  </form>
+  
+  </div>

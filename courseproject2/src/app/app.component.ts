@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, OnDestroy, ElementRef, ViewChild, ɵConsole } from '@angular/core';
 import { ActivateService } from './test-component/user/user-activate.service';
 import { Subscription, Observable } from 'rxjs';
 import { NgForm, NgModel,
@@ -37,6 +37,7 @@ export class AppComponent implements OnInit, OnDestroy {
  'hobbies' : new FormArray([]),
 
     });
+    console.log('ion');
 
     
 
