@@ -35,19 +35,20 @@
   
   
   <div class="container">
-  <form  (ngSubmit)="onSubmit()">
+  <form  (ngSubmit)="onSubmitTD()" #templateProjectForm="ngForm">
   <div class="row form-group">
-    <label for="projectName">Project Name:</label>
-    <input class="form-control"   id="projectName">
-    <span class="help-block">You're Not Allowed To Do That Baby!</span>
+    <label for="projectNameTD">Project Name:</label>
+    <input class="form-control" #projectName="ngModel" required ngModel name="projectNameTD" id="projectNameTD">
+    <span class="help-block" *ngIf="!projectName.valid && projectName.touched">Please Enter A Valid Username!</span>
   </div>
   <div class="row form-group">
-    <label for="email">Email:</label>
-    <input class="form-control"        id="email">
+    <label for="emailTD">Email:</label>
+    <input class="form-control" required #email="ngModel"   ngModel email   name="emailTD" id="emailTD">
+    <span class="help-block" *ngIf="!email.valid && email.touched">Please Enter A Valid Email!</span>
   </div>
   <div class="row form-group">
     <label for="status">Status:</label>
-    <select  class="form-control"   id="status">
+    <select   class="form-control" required [ngModel]="'Critical'" name="statusTD" id="statusTD">
   
       <option *ngFor="let status of statuses" [value]="status" class="form-control">{{status}}</option>
    

@@ -1,22 +1,22 @@
 <div class="row">
   <div class="col-xs-12">
-    <form>
+    <form [formGroup]="addingShoppingForm" (ngSubmit)="addIngredient()">
       <div class="row">
         <div class="col-sm-5 form-group">
           <label for="name"
                  
                  >Name</label>
-          <input #nameInput type="text" id="name" class="form-control" />
+          <input  type="text" formControlName="itemName" id="name" class="form-control" />
 
         </div>
         <div class="col-sm-2">
           <label for="amount">Amount</label>
-          <input #nameAmount type="number" id="amount" class="form-control" />
+          <input  type="number" formControlName="amount" id="amount" class="form-control" />
         </div>
       </div>
       <div class="row">
         <div class="col-sm-12">
-          <button class="btn btn-success" type="submit" (click)="addIngredient()">Add</button>
+          <button class="btn btn-success" type="submit" >Add</button>
           <button class="btn btn-danger" type="button">Delete</button>
           <button class="btn btn-warning" type="button">Clear</button>
           
