@@ -63,7 +63,7 @@ HomeComponent,
     
  
   ],
-  providers: [ /*CanDeactivateGuard*/ ShoppingListService, AuthService, AuthGuard, RecipeDetailResolver, RecipeService],
+  providers: [ /*CanDeactivateGuard*/ ShoppingListService, RecipeDetailResolver, RecipeService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

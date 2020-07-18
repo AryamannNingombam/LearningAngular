@@ -7,7 +7,7 @@ import { ShoppingListService } from './shoppinglist.service';
 @Injectable()
 export class RecipeService {
   recipeSelected = new Subject<Recipe>();
-
+  recipesUpdated = new Subject<Recipe[]>();
 
   private recipes: Recipe[] = [
     new Recipe('Chappati', 'Daily Food In India', 'https://upload.wikimedia.org/wikipedia/commons/thumb/f/fe/2_Chapati_warm_and_ready_to_be_eaten.jpg/320px-2_Chapati_warm_and_ready_to_be_eaten.jpg', [new Ingredient('Flour', 20), new Ingredient('Olive Oil',2)])
@@ -22,10 +22,27 @@ export class RecipeService {
   }
   addIngredients(ingredients: Ingredient[]) {
     this.shoppingListService.addIngredients(ingredients);
+    this.recipesUpdated.next(this.recipes);
   }
   getRecipe(id: number) {
     return this.recipes[id];
   }
+  addRecipe(recipe   : Recipe){
+    this.recipes.push(recipe);
+    this.recipesUpdated.next(this.recipes.slice());;
 
+  }
+  updateRecipe(index : number,recipe : Recipe){
+    this.recipes[index] = recipe;
+    this.recipesUpdated.next(this.recipes.slice());;
+  }
+  deleteRecipe(index : number)
+  {
+    this.recipes.splice(index,1);
+    this.recipesUpdated.next(this.recipes.slice())
+  }
+  getIndex(recipe : Recipe){
+    return this.recipes.indexOf(recipe);
+  }
 
 }

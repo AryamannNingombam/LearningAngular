@@ -14,6 +14,7 @@ export class ShoppingEditComponent implements OnInit,OnDestroy {
   editingSubscription : Subscription;
   editMode = false;
   editingIndex  : number;
+  private editedItem  : Ingredient;
   constructor(private shoppingListService: ShoppingListService) { }
 
   ngOnInit(): void {
@@ -26,7 +27,11 @@ export class ShoppingEditComponent implements OnInit,OnDestroy {
  
       this.editMode =true;
       this.editingIndex = index;
-
+      this.editedItem = this.shoppingListService.getIngredient(index);
+    this.addingShoppingForm.patchValue({
+      'itemName'  : this.editedItem.name,
+      'amount'  : this.editedItem.amount
+    })
 
     })
 
@@ -38,8 +43,25 @@ this.editingSubscription.unsubscribe();
 
   addIngredient() {
 const values = this.addingShoppingForm.value;
-    let newIngredient = new Ingredient(values['itemName'], parseInt(values['amount']))
-    this.shoppingListService.editingEvent.next(newIngredient);
+let newIngredient = new Ingredient(values['itemName'], parseInt(values['amount']))
+if (this.editMode){
+  this.shoppingListService.updateIngredient(this.editingIndex,newIngredient);
+  this.editMode = false;
+
+
+  this.addingShoppingForm.patchValue({
+    'itemName' : null,
+    'amount' : null
+  });
+} else{
+  this.shoppingListService.editingEvent.next(newIngredient);
+  this.addingShoppingForm.patchValue({
+    'itemName' : null,
+    'amount' : null
+  });
+}
+    
+   
   }
   checkingNegative(control : FormControl) : {[s : string] : boolean}{
     if (parseInt(control.value) <=0 )
@@ -48,6 +70,18 @@ const values = this.addingShoppingForm.value;
     }
     return null
 
+  }
+  onClear(){
+    this.addingShoppingForm.reset();
+    this.editMode = false;
+  }
+  onDelete(){
+this.shoppingListService.deleteIngredient(this.editingIndex);
+  this.editMode = false;
+  this.addingShoppingForm.reset();
+   
+
+    
   }
 
 
