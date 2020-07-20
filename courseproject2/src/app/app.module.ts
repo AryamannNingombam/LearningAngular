@@ -12,7 +12,7 @@ import { ShoppingEditComponent } from './shopping-list/shopping-edit/shopping-ed
 import { UnlessDirective } from './Directives/unless/unless.directive';
 import { DropdownDirective } from './shared/dropdown.directive'
 import { TestComponent } from './test-component/test.component'
-
+import {ShortenPipe} from './shorten.pipe'
 
 
 import { ShoppingListService } from './Services/shoppinglist.service';
@@ -28,7 +28,7 @@ import { NoRecipeShownComponent } from './recipes/no-recipe-shown/no-recipe-show
 import { NewRecipeComponent } from './recipes/new-recipe/new-recipe.component';
 import { UserComponent } from './test-component/user/user.component';
 import { HomeComponent } from './test-component/home/home.component';
-
+import {FilterPipe} from './filter.pipe'
 
 
 
@@ -51,6 +51,8 @@ NoRecipeShownComponent,
 NewRecipeComponent,
 UserComponent,
 HomeComponent,
+ShortenPipe,
+FilterPipe
 
 
  
