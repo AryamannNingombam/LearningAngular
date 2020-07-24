@@ -37,4 +37,8 @@ export class PostService{
     
     }
 
+    deletePosts(){
+      return this.http.delete('https://course-test-bfba8.firebaseio.com/posts.json')
+    }
+
 }

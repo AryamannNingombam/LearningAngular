@@ -20,11 +20,13 @@ export class TestComponent implements OnInit{
  loadedPosts : Post[] = [];
  myForm  : FormGroup ;
  isFetching = false;
-
+error = null;
   constructor(private postService  : PostService) {}
   onCreatePost( ) {
     // Send Http request
     this.postService.createAndStorePost(this.myForm.value['title'],this.myForm.value['content']);
+    this.loadedPosts.push(this.myForm.value);
+    this.myForm.reset();
   }
 
 
@@ -34,6 +36,8 @@ export class TestComponent implements OnInit{
     this.postService.fetchPosts().subscribe((data)=>{
       this.loadedPosts = data;
       this.isFetching = false;
+    },error=>{
+      this.error  =  error.message;
     })
   }
 
@@ -41,6 +45,9 @@ export class TestComponent implements OnInit{
 
   onClearPosts() {
     // Send Http request
+
+    this.postService.deletePosts().subscribe(data=>{console.log(data)})
+  this.loadedPosts = [];
   }
  
   ngOnInit() {
@@ -53,6 +60,9 @@ this.isFetching = true
 this.postService.fetchPosts().subscribe((data)=>{
   this.loadedPosts = data;
   this.isFetching = false;
+},error=>{
+  console.log(error);
+  this.error  =  error.error.error;
 })
 
 
