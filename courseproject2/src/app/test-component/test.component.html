@@ -1,65 +1,64 @@
-<h1>REACTIVE METHOD</h1>
 <div class="container">
-<form [formGroup]="makingProjectForm" (ngSubmit)="onSubmit()">
-<div class="row form-group">
-  <label for="projectName">Project Name:</label>
-  <input class="form-control" formControlName="projectName"  id="projectName">
-  <span class="help-block" *ngIf="!makingProjectForm.get('projectName').valid && makingProjectForm.get('projectName').touched">You're Not Allowed To Do That Baby!</span>
-</div>
-<div class="row form-group">
-  <label for="email">Email:</label>
-  <input class="form-control" formControlName="email"  id="email">
-</div>
-<div class="row form-group">
-  <label for="status">Status:</label>
-  <select  class="form-control" formControlName="projectStatus"  id="status">
-
-    <option *ngFor="let status of statuses" [value]="status" class="form-control">{{status}}</option>
- 
-
-  </select>
-</div>
-
-
-
-
-  <button class="btn btn-success" type="submit">Submit</button>
-</form>
-
-</div>
-
-
-
-
-<h1>TEMPLATE DRIVEN</h1>
-  
-  
-  <div class="container">
-  <form  (ngSubmit)="onSubmitTD()" #templateProjectForm="ngForm">
-  <div class="row form-group">
-    <label for="projectNameTD">Project Name:</label>
-    <input class="form-control" #projectName="ngModel" required ngModel name="projectNameTD" id="projectNameTD">
-    <span class="help-block" *ngIf="!projectName.valid && projectName.touched">Please Enter A Valid Username!</span>
+  <div class="row">
+    <div class="col-xs-12 col-md-6 col-md-offset-3">
+      <form [formGroup]="myForm" (ngSubmit)="onCreatePost()">
+        <div class="form-group">
+          <label for="title">Title</label>
+          <input
+           
+            class="form-control"
+        
+            formControlName="title"
+          
+          />
+        </div>
+        <div class="form-group">
+          <label for="content">Content</label>
+          <textarea
+            class="form-control"
+           
+            
+            formControlName="content"
+        
+          ></textarea>
+        </div>
+        <button
+          class="btn btn-primary"
+          type="submit"
+          [disabled]="!myForm.valid"
+        >
+          Send Post
+        </button>
+      </form>
+    </div>
   </div>
-  <div class="row form-group">
-    <label for="emailTD">Email:</label>
-    <input class="form-control" required #email="ngModel"   ngModel email   name="emailTD" id="emailTD">
-    <span class="help-block" *ngIf="!email.valid && email.touched">Please Enter A Valid Email!</span>
-  </div>
-  <div class="row form-group">
-    <label for="status">Status:</label>
-    <select   class="form-control" required [ngModel]="'Critical'" name="statusTD" id="statusTD">
-  
-      <option *ngFor="let status of statuses" [value]="status" class="form-control">{{status}}</option>
+  <hr />
+  <div class="row">
+    <div class="col-xs-12 col-md-6 col-md-offset-3">
+      <button class="btn btn-primary" (click)="onFetchPosts()">
+        Fetch Posts
+      </button>
+      |
+      <button
+        class="btn btn-danger"
    
-  
-    </select>
+        (click)="onClearPosts()"
+      >
+        Clear Posts
+      </button>
+    </div>
   </div>
-  
-  
-  
-  
-    <button class="btn btn-success" type="submit">Submit</button>
-  </form>
-  
+  <div class="row">
+    <div class="col-xs-12 col-md-6 col-md-offset-3">
+      <p *ngIf="loadedPosts.length ==  0  && !isFetching">No posts available!</p>
+      <ul class="list-group" *ngIf="loadedPosts.length > 0  && !isFetching">
+        <li class="list-group-item" *ngFor="let post of loadedPosts">
+          <h2>{{post.title}}</h2> 
+          <p>{{post.content}}</p>         
+
+        </li>
+      </ul>
+      <p *ngIf="isFetching">Loading...</p>
+    </div>
   </div>
+</div>

@@ -9,8 +9,10 @@ import { RecipeDetailComponent } from './recipes/recipe-detail/recipe-detail.com
 import { RecipeDetailResolver } from './recipes/recipe-detail/recipe-detail-resolver.service';
 import { NoRecipeShownComponent } from './recipes/no-recipe-shown/no-recipe-shown.component';
 import { NewRecipeComponent } from './recipes/new-recipe/new-recipe.component';
+import { Route } from '@angular/compiler/src/core';
+import { TestComponent } from './test-component/test.component';
 
-
+/*
 const appRoutes: Routes = [
   
   {
@@ -44,7 +46,10 @@ const appRoutes: Routes = [
   }
 
 ]
-
+*/
+const appRoutes : Routes = [
+  {path : '',component: TestComponent}
+]
 
 
 
