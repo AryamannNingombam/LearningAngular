@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import {map} from 'rxjs/operators';
+import { HttpClient, } from '@angular/common/http';
+import {map,tap} from 'rxjs/operators';
 
 interface Post{
     title : string,
@@ -13,7 +13,9 @@ export class PostService{
     createAndStorePost(title:string,content:string){
         const post : Post = {title : title,content  : content}
 
-  this.http.post<{name : string}>('https://course-test-bfba8.firebaseio.com/posts.json',post).subscribe(
+  this.http.post<{name : string}>('https://course-test-bfba8.firebaseio.com/posts.json',post,{
+    observe : 'response'
+  }).subscribe(
     responseData=>{
       console.log(responseData);
     }
@@ -38,7 +40,14 @@ export class PostService{
     }
 
     deletePosts(){
-      return this.http.delete('https://course-test-bfba8.firebaseio.com/posts.json')
+      return this.http.delete('https://course-test-bfba8.firebaseio.com/posts.json',{
+
+        observe  : 'events',
+        
+
+      }).pipe(tap((event)=>{
+        console.log(event);
+      }))
     }
 
 }

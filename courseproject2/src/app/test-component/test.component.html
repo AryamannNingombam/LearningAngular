@@ -23,7 +23,7 @@
           ></textarea>
         </div>
         <button
-          class="btn btn-primary"
+          class="btn btn-success"
           type="submit"
           [disabled]="!myForm.valid"
         >
@@ -46,6 +46,10 @@
       >
         Clear Posts
       </button>
+      <div class="alert alert-warning" *ngIf="deletionSuccessful">
+        <p>Your DB Has Been Cleared <strong>Be HAppy!</strong> </p>
+        <button class="btn btn-success" (click)="deleteDismiss()">Dismiss</button>
+      </div>
     </div>
   </div>
   <div class="row">
@@ -59,9 +63,10 @@
         </li>
       </ul>
       <p *ngIf="isFetching && !error">Loading...</p>
-      <div *ngIf="error" class="alert alert-danger">
+      <div *ngIf="error" class="alert alert-danger alert-dismissable">
         <h2>An Error Occurred!</h2>
         <p>{{error}}</p>
+        <button class="btn btn-lg btn-danger" (click)="errorDismiss()">Okay</button>
       </div>
     </div>
   </div>
