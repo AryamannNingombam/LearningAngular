@@ -17,10 +17,14 @@ export class HeaderComponent implements OnInit {
   saveRecipes(){
     this.dataStoringService.storeRecipes().subscribe(data=>{
       console.log(data);
+    });
+    this.dataStoringService.storeIngredients().subscribe(data=>{
+      console.log(data);
     })
   }
 fetchRecipes(){
-  this.dataStoringService.fetchRecipes();
+  this.dataStoringService.fetchRecipes().subscribe();
+  this.dataStoringService.fetchIngredients().subscribe();
 }
 
 }

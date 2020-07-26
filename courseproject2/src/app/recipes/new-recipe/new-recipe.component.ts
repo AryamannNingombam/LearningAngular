@@ -36,7 +36,7 @@ export class NewRecipeComponent implements OnInit {
     let desc = '';
     let ingredientsArray = new FormArray([]);
     if (this.editMode){
-      const recipeToEdit = this.recipeService.getRecipe(this.id- 1);
+      const recipeToEdit = this.recipeService.getRecipe(this.id);
       recipeName = recipeToEdit.name;
       imagePath = recipeToEdit.imagePath;
       desc  = recipeToEdit.description;
@@ -71,7 +71,7 @@ export class NewRecipeComponent implements OnInit {
     const newRecipe= new Recipe(recipeName,recipeDesc,recipeImage,recipeIngredients)
     
     if (this.editMode){
-      this.recipeService.updateRecipe(this.id-1,newRecipe);
+      this.recipeService.updateRecipe(this.id,newRecipe);
 
     } else{
       this.recipeService.addRecipe(newRecipe);

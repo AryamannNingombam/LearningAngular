@@ -1,15 +1,22 @@
 import { Ingredient } from '../shared/ingredient.model';
 import { Subject } from 'rxjs'
 
+
 export class ShoppingListService {
   editingEvent = new Subject<Ingredient>();
   startEditingItem = new Subject<number>();
   ingredientsChanged = new Subject<Ingredient[]>()
-  private ingredients: Ingredient[] = [
-    new Ingredient('Apples', 5),
-    new Ingredient('Tomatoes', 10),
+  // private ingredients: Ingredient[] = [
+  //   new Ingredient('Apples', 5),
+  //   new Ingredient('Tomatoes', 10),
 
-  ];
+  // ];
+private ingredients : Ingredient[] = [];
+setIngredients(ingre : Ingredient[]){
+  this.ingredients = ingre;
+  this.ingredientsChanged.next(this.ingredients);
+
+}
 
   getIngredients() {
     return this.ingredients.slice();
