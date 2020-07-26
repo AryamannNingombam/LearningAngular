@@ -19,9 +19,7 @@ import { ShoppingListService } from './Services/shoppinglist.service';
 
 
 import { AppRoutingModule } from './app-routing.module';
-import { AuthService } from './auth-service';
-import { AuthGuard } from './auth-guard.service';
-import {PostService} from './test-component/posts.service'
+
 import { RecipeDetailResolver } from './recipes/recipe-detail/recipe-detail-resolver.service';
 import { RecipeService } from './Services/recipes.services';
 import { NoRecipeShownComponent } from './recipes/no-recipe-shown/no-recipe-shown.component';
@@ -29,8 +27,8 @@ import { NewRecipeComponent } from './recipes/new-recipe/new-recipe.component';
 import { UserComponent } from './test-component/user/user.component';
 import { HomeComponent } from './test-component/home/home.component';
 import {FilterPipe} from './filter.pipe'
-import { HttpClientModule } from '@angular/common/http';
-
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import {LoggingInterceptorService} from './test-component/logging-interceptor.service'
 
 
 @NgModule({
@@ -67,7 +65,8 @@ FilterPipe
     
  
   ],
-  providers: [ PostService, ShoppingListService, RecipeDetailResolver, RecipeService],
+  providers: [ 
+     ShoppingListService, RecipeDetailResolver, RecipeService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -9,7 +9,7 @@ import { Injectable } from '@angular/core';
 export class RecipeDetailResolver implements Resolve<Recipe>{
   constructor(private recipeService: RecipeService) { }
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<Recipe> | Promise<Recipe> | Recipe {
-    let recipeToFind= this.recipeService.getRecipe(parseInt(route.params['recipeId']) -1)
+    let recipeToFind= this.recipeService.getRecipe(parseInt(route.params['recipeId']))
 
     return recipeToFind
   }

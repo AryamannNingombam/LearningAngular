@@ -17,12 +17,18 @@ export class RecipeService {
   ];
   constructor(private shoppingListService: ShoppingListService) {}
 
+  setRecipes(recipes : Recipe[]){
+    this.recipes = recipes;
+    
+    this.recipesUpdated.next(this.recipes);
+  }
+
   getRecipes() {
     return this.recipes.slice();
   }
   addIngredients(ingredients: Ingredient[]) {
     this.shoppingListService.addIngredients(ingredients);
-    this.recipesUpdated.next(this.recipes);
+    this.recipesUpdated.next(this.recipes.slice());
   }
   getRecipe(id: number) {
     return this.recipes[id];
@@ -39,7 +45,8 @@ export class RecipeService {
   deleteRecipe(index : number)
   {
     this.recipes.splice(index,1);
-    this.recipesUpdated.next(this.recipes.slice())
+    this.recipesUpdated.next(this.recipes.slice());
+    console.log(this.recipes);
   }
   getIndex(recipe : Recipe){
     return this.recipes.indexOf(recipe);

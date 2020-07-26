@@ -52,10 +52,7 @@ error = null;
     // Send Http request
 
     this.postService.deletePosts().subscribe(event=>{
-      if (event.type === HttpEventType.Sent){
-        this.deletionSuccessful = true;
-
-      }
+      
     });
   this.loadedPosts = [];
   }
