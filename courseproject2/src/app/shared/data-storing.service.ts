@@ -34,12 +34,14 @@ export class DataStoringService{
          return recipes.map(recipe=>{
             return {...recipe,ingredients : recipe.ingredients  ? recipe.ingredients : [] }})
       }),tap(recipes=>{
+
          this.recipeService.setRecipes(recipes);
       }))
    }
 
    fetchIngredients(){
       return this.http.get<Ingredient[]>(this.baseUrlShopping).pipe(tap(ings=>{
+         
          this.shoppingListService.setIngredients(ings);
       }))
    }

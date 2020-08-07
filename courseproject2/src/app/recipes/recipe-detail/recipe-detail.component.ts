@@ -1,19 +1,24 @@
-import { Component, OnInit,Input } from '@angular/core';
+import { Component, OnInit, ComponentFactoryResolver, ViewChild, OnDestroy } from '@angular/core';
 import { Recipe } from '../recipe.model'
-import { ShoppingListService } from '../../Services/shoppinglist.service';
-import { RecipeService } from '../../Services/recipes.services';
-import { ActivatedRoute, Data, Router } from '@angular/router';
 
+import { RecipeService } from '../../Services/recipes.services';
+import { ActivatedRoute, Router } from '@angular/router';
+import {AlertComponent} from '../../alert/alert.component';
+import { PlaceHolderDirective } from 'src/app/shared/placeholder.directive';
+import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-recipe-detail',
   templateUrl: './recipe-detail.component.html',
   styleUrls: ['./recipe-detail.component.css'],
   
 })
-export class RecipeDetailComponent implements OnInit {
-  recipeDetails: Recipe
+export class RecipeDetailComponent implements OnInit,OnDestroy {
+  recipeDetails: Recipe;
+  showAlert = false;
+  private closeSub : Subscription;
+  @ViewChild(PlaceHolderDirective,{static : false}) alertHost : PlaceHolderDirective
 
-  constructor(private recipeService: RecipeService, private route: ActivatedRoute,private router: Router) { }
+  constructor(private recipeService: RecipeService, private route: ActivatedRoute,private router: Router,private componentFactoryResolver : ComponentFactoryResolver) { }
 
   ngOnInit(): void {
 
@@ -28,7 +33,7 @@ export class RecipeDetailComponent implements OnInit {
   }
   addIngredients() {
     this.recipeService.addIngredients(this.recipeDetails.ingredients);
-
+    this.showAlertFunc('Shopping List Updated!');
   }
 deleteRecipe(){
   if (confirm('Do You Want To Delete This Recipe?')){
@@ -38,6 +43,33 @@ deleteRecipe(){
  
   } 
 
+
+}
+
+onHandleError(){
+  this.showAlert = false;
+
+}
+private showAlertFunc(message : string){
+  //const alertComp = new AlertComponent() #DOES NOT WORK
+  this.showAlert = true;
+  const alertComponentFactory =  this.componentFactoryResolver.resolveComponentFactory(AlertComponent);
+const hostViewContainerRef = this.alertHost.viewContainerRef;
+hostViewContainerRef.clear();
+const componentRef  = hostViewContainerRef.createComponent(alertComponentFactory);
+componentRef.instance.message = message;
+this.closeSub =   componentRef.instance.close.subscribe(()=>{
+
+  this.closeSub.unsubscribe();
+  hostViewContainerRef.clear();
+  this.showAlert = false;
+})
+}
+ngOnDestroy(){
+  if (this.closeSub){
+    this.closeSub.unsubscribe();
+  }
+  
 }
 
 }
